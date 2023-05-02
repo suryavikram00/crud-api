@@ -10,10 +10,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 @EnableScheduling
 @ComponentScan("com.crud.api")
-public class CrudDashboardApplication {
+public class CrudApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CrudDashboardApplication.class, args);
+        SpringApplication.run(CrudApiApplication.class, args);
     }
 
 }

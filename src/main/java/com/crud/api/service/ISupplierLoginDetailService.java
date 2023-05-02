@@ -4,8 +4,8 @@
  */
 package com.crud.api.service;
 
-import com.crud.dashboard.generic.service.IGenericService;
-import com.crud.dashboard.entity.SupplierLoginDetailsEntity;
+import com.crud.api.generic.service.IGenericService;
+import com.crud.api.entity.SupplierLoginDetailsEntity;
 
 /**
  *

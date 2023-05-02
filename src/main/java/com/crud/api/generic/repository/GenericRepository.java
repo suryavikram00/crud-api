@@ -8,7 +8,7 @@ package com.crud.api.generic.repository;
  *
  * @author NMSLAP570
  */
-import com.crud.dashboard.generic.entity.BaseEntity;
+import com.crud.api.generic.entity.BaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

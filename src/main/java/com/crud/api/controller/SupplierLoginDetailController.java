@@ -4,11 +4,11 @@
  */
 package com.crud.api.controller;
 
-import com.crud.dashboard.generic.controller.GenericController;
-import com.crud.dashboard.entity.SupplierLoginDetailsEntity;
+import com.crud.api.generic.controller.GenericController;
+import com.crud.api.entity.SupplierLoginDetailsEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import static com.crud.dashboard.constants.Endpoints.ENDPOINT_SUPPLIER_LOGIN_DETAIL;
+import static com.crud.api.constants.Endpoints.ENDPOINT_SUPPLIER_LOGIN_DETAIL;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**

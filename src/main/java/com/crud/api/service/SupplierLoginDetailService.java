@@ -4,8 +4,8 @@
  */
 package com.crud.api.service;
 
-import com.crud.dashboard.generic.service.GenericService;
-import com.crud.dashboard.entity.SupplierLoginDetailsEntity;
+import com.crud.api.generic.service.GenericService;
+import com.crud.api.entity.SupplierLoginDetailsEntity;
 import org.springframework.stereotype.Service;
 
 /**

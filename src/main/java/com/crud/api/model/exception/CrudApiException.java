@@ -3,10 +3,10 @@ package com.crud.api.model.exception;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class CrudDashboardException extends RuntimeException {
+public class CrudApiException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
-    public CrudDashboardException(String message) {
+    public CrudApiException(String message) {
         super(message);
     }
 }

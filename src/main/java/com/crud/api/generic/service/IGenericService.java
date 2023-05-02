@@ -4,8 +4,8 @@
  */
 package com.crud.api.generic.service;
 
-import com.crud.dashboard.generic.entity.BaseEntity;
-import com.crud.dashboard.generic.entity.SimplePage;
+import com.crud.api.generic.entity.BaseEntity;
+import com.crud.api.generic.entity.SimplePage;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

@@ -4,8 +4,8 @@
  */
 package com.crud.api.repository;
 
-import com.crud.dashboard.generic.repository.GenericRepository;
-import com.crud.dashboard.entity.SupplierLoginDetailsEntity;
+import com.crud.api.generic.repository.GenericRepository;
+import com.crud.api.entity.SupplierLoginDetailsEntity;
 import org.springframework.stereotype.Repository;
 
 /**

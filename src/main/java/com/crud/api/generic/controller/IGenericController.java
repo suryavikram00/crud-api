@@ -4,7 +4,7 @@
  */
 package com.crud.api.generic.controller;
 
-import com.crud.dashboard.generic.entity.BaseEntity;
+import com.crud.api.generic.entity.BaseEntity;
 import javax.websocket.server.PathParam;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;

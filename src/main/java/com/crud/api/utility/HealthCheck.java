@@ -1,7 +1,7 @@
 package com.crud.api.utility;
 
-import static com.crud.dashboard.constants.Endpoints.ENDPOINT_V1_NMNCR_PREFIX;
-import static com.crud.dashboard.constants.Endpoints.GET_API_HEALTH_STATUS;
+import static com.crud.api.constants.Endpoints.ENDPOINT_V1_NMNCR_PREFIX;
+import static com.crud.api.constants.Endpoints.GET_API_HEALTH_STATUS;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

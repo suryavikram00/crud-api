@@ -4,8 +4,8 @@
  */
 package com.crud.api.controller;
 
-import com.crud.dashboard.generic.controller.IGenericController;
-import com.crud.dashboard.entity.SupplierLoginDetailsEntity;
+import com.crud.api.generic.controller.IGenericController;
+import com.crud.api.entity.SupplierLoginDetailsEntity;
 
 /**
  *

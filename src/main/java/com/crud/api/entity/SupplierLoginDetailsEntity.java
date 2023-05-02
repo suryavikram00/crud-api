@@ -4,7 +4,7 @@
  */
 package com.crud.api.entity;
 
-import com.crud.dashboard.generic.entity.BaseEntity;
+import com.crud.api.generic.entity.BaseEntity;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;

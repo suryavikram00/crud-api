@@ -1,6 +1,6 @@
 package com.crud.api.model;
 
-import com.crud.dashboard.constants.StatusEnum;
+import com.crud.api.constants.StatusEnum;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CrudDashboardResponse<T> {
+public class CrudApiResponse<T> {
 
 	@JsonProperty("status")
 	private StatusEnum status;
@@ -37,21 +37,21 @@ public class CrudDashboardResponse<T> {
 	@JsonProperty("objectList")
 	private List<T> objectList;
 
-	private CrudDashboardResponse() {
+	private CrudApiResponse() {
 		timestamp = LocalDateTime.now();
 	}
 
-	public CrudDashboardResponse(StatusEnum status) {
+	public CrudApiResponse(StatusEnum status) {
 		this();
 		this.status = status;
 	}
 
-	public CrudDashboardResponse<T> addMessage(String message) {
+	public CrudApiResponse<T> addMessage(String message) {
 		this.message = message;
 		return this;
 	}
 
-	public CrudDashboardResponse<T> addDebugMessage(Throwable debugMessage) {
+	public CrudApiResponse<T> addDebugMessage(Throwable debugMessage) {
 		this.debugMessage = debugMessage.getLocalizedMessage();
 		return this;
 	}

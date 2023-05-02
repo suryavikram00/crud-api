@@ -4,9 +4,9 @@
  */
 package com.crud.api.generic.service;
 
-import com.crud.dashboard.generic.entity.BaseEntity;
-import com.crud.dashboard.generic.entity.SimplePage;
-import com.crud.dashboard.generic.repository.GenericRepository;
+import com.crud.api.generic.entity.BaseEntity;
+import com.crud.api.generic.entity.SimplePage;
+import com.crud.api.generic.repository.GenericRepository;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;

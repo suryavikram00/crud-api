@@ -1,6 +1,6 @@
 package com.crud.api.exceptionhandler;
 
-import com.crud.dashboard.constants.StatusEnum;
+import com.crud.api.constants.StatusEnum;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,36 +16,37 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 
-import com.crud.dashboard.model.ApiResponseValidationError;
-import com.crud.dashboard.model.CrudDashboardResponse;
-import com.crud.dashboard.model.exception.CrudDashboardException;
+import com.crud.api.model.ApiResponseValidationError;
+import com.crud.api.model.CrudApiResponse;
+import com.crud.api.model.exception.CrudApiException;
+
 
 @ControllerAdvice
-public class CrudDashboardExceptionHandler {
+public class CrudApiExceptionHandler {
 
-    @ExceptionHandler(value = CrudDashboardException.class)
-    public ResponseEntity<CrudDashboardResponse<String>> magnumExceptionHandler(CrudDashboardException exception, WebRequest request) {
+    @ExceptionHandler(value = CrudApiException.class)
+    public ResponseEntity<CrudApiResponse<String>> magnumExceptionHandler(CrudApiException exception, WebRequest request) {
         String message = "Magnum Runtime Exception";
-        return buildResponseEntity(new CrudDashboardResponse<String>(StatusEnum.FAILURE).addMessage(message).addDebugMessage(exception));
+        return buildResponseEntity(new CrudApiResponse<String>(StatusEnum.FAILURE).addMessage(message).addDebugMessage(exception));
     }
 
     @ExceptionHandler(value = SQLIntegrityConstraintViolationException.class)
-    public ResponseEntity<CrudDashboardResponse<String>> constraintViolationExceptionHandler(
+    public ResponseEntity<CrudApiResponse<String>> constraintViolationExceptionHandler(
             SQLIntegrityConstraintViolationException ex, WebRequest request) {
         String message = "Data Integrity Violation";
-        CrudDashboardResponse<String> magnumResponse = new CrudDashboardResponse<>(StatusEnum.FAILURE);
+        CrudApiResponse<String> magnumResponse = new CrudApiResponse<>(StatusEnum.FAILURE);
         magnumResponse.setMessage("Data is not valid");
         magnumResponse.setDebugMessage(ex.getLocalizedMessage());
 
-        return buildResponseEntity(new CrudDashboardResponse<String>(StatusEnum.FAILURE)
+        return buildResponseEntity(new CrudApiResponse<String>(StatusEnum.FAILURE)
                 .addMessage(ex.getMessage() != null ? ex.getMessage() : message).addDebugMessage(ex));
     }
 
     @ExceptionHandler(value = ConstraintViolationException.class)
-    public ResponseEntity<CrudDashboardResponse<String>> constraintViolationExceptionHandler(ConstraintViolationException ex,
+    public ResponseEntity<CrudApiResponse<String>> constraintViolationExceptionHandler(ConstraintViolationException ex,
             WebRequest request) {
         StringBuffer message = new StringBuffer("Data is not valid");
-        CrudDashboardResponse<String> magnumResponse = new CrudDashboardResponse<>(StatusEnum.FAILURE);
+        CrudApiResponse<String> magnumResponse = new CrudApiResponse<>(StatusEnum.FAILURE);
 
         List<ApiResponseValidationError> validationErrorList = ex.getConstraintViolations().stream().map(error -> {
             String fieldName = ((FieldError) error).getField();
@@ -59,15 +60,15 @@ public class CrudDashboardExceptionHandler {
 
         magnumResponse.setErrorList(validationErrorList);
 
-        return buildResponseEntity(new CrudDashboardResponse<String>(StatusEnum.FAILURE)
+        return buildResponseEntity(new CrudApiResponse<String>(StatusEnum.FAILURE)
                 .addMessage(ex.getMessage() != null ? ex.getMessage() : message.toString()).addDebugMessage(ex));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResponseEntity<CrudDashboardResponse<String>> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException ex) {
+    public ResponseEntity<CrudApiResponse<String>> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException ex) {
 
-        CrudDashboardResponse<String> magnumResponse = new CrudDashboardResponse<>(StatusEnum.FAILURE);
+        CrudApiResponse<String> magnumResponse = new CrudApiResponse<>(StatusEnum.FAILURE);
 
         StringBuffer message = new StringBuffer("Data is not valid");
 
@@ -85,12 +86,12 @@ public class CrudDashboardExceptionHandler {
     }
 
     @ExceptionHandler(value = Exception.class)
-    public ResponseEntity<CrudDashboardResponse<String>> genericExceptionHandler(Exception exception, WebRequest request) {
+    public ResponseEntity<CrudApiResponse<String>> genericExceptionHandler(Exception exception, WebRequest request) {
         String message = "Something went wrong,Please contact magnum team";
-        return buildResponseEntity(new CrudDashboardResponse<String>(StatusEnum.FAILURE).addMessage(message).addDebugMessage(exception));
+        return buildResponseEntity(new CrudApiResponse<String>(StatusEnum.FAILURE).addMessage(message).addDebugMessage(exception));
     }
 
-    private ResponseEntity<CrudDashboardResponse<String>> buildResponseEntity(CrudDashboardResponse<String> magnumResponse) {
+    private ResponseEntity<CrudApiResponse<String>> buildResponseEntity(CrudApiResponse<String> magnumResponse) {
         return new ResponseEntity<>(magnumResponse, HttpStatus.BAD_REQUEST);
     }
 

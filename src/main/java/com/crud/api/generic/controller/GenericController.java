@@ -4,8 +4,8 @@
  */
 package com.crud.api.generic.controller;
 
-import com.crud.dashboard.generic.entity.BaseEntity;
-import com.crud.dashboard.generic.service.IGenericService;
+import com.crud.api.generic.entity.BaseEntity;
+import com.crud.api.generic.service.IGenericService;
 import javax.websocket.server.PathParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
