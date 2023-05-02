@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  # mysqldb:
+  #   container_name: mysqldb
+  #   image: mysql:latest
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=1@aA
+  #     - MYSQL_DATABASE=nuttycrunch
+  #     - MYSQL_USER=user
+  #     - MYSQL_PASSWORD=user
+  #   restart: always
+  #   ports:
+  #     - 3307:3306
+  #   volumes:
+  #     - mysqldb:/var/lib/mysql
+  api:
+    container_name: api
+    image: nuttycrunch-purchase-order
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    # depends_on:
+    #   - mysqldb
+    ports:
+      - 8080:8080
+    restart: always   
+
+# volumes:
+#   mysqldb:
