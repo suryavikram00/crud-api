@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
-public class ApiResponseValidationError extends ApiResponseError {
+public class CrudApiResponseValidationError extends CrudApiResponseError {
 
 	@JsonProperty("object")
 	private String object;
@@ -23,7 +23,7 @@ public class ApiResponseValidationError extends ApiResponseError {
 	@JsonProperty("message")
 	private String message;
 
-	public ApiResponseValidationError(String object, String message) {
+	public CrudApiResponseValidationError(String object, String message) {
 		this.object = object;
 		this.message = message;
 	}

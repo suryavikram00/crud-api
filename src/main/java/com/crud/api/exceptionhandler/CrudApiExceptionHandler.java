@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 
-import com.crud.api.model.ApiResponseValidationError;
+import com.crud.api.model.CrudApiResponseValidationError;
 import com.crud.api.model.CrudApiResponse;
 import com.crud.api.model.exception.CrudApiException;
 
@@ -48,11 +48,11 @@ public class CrudApiExceptionHandler {
         StringBuffer message = new StringBuffer("Data is not valid");
         CrudApiResponse<String> magnumResponse = new CrudApiResponse<>(StatusEnum.FAILURE);
 
-        List<ApiResponseValidationError> validationErrorList = ex.getConstraintViolations().stream().map(error -> {
+        List<CrudApiResponseValidationError> validationErrorList = ex.getConstraintViolations().stream().map(error -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getMessage();
             message.append(" || " + fieldName + ":" + errorMessage);
-            return new ApiResponseValidationError(fieldName, errorMessage);
+            return new CrudApiResponseValidationError(fieldName, errorMessage);
         }).collect(Collectors.toList());
 
         magnumResponse.setMessage(message.toString());
@@ -76,7 +76,7 @@ public class CrudApiExceptionHandler {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             message.append(" || " + fieldName + ":" + errorMessage);
-            return new ApiResponseValidationError(fieldName, errorMessage);
+            return new CrudApiResponseValidationError(fieldName, errorMessage);
         }).collect(Collectors.toList()));
 
         magnumResponse.setMessage(message.toString());

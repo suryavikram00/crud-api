@@ -29,7 +29,7 @@ public class CrudApiResponse<T> {
 	private String debugMessage;
 
 	@JsonProperty("error_list")
-	private List<ApiResponseValidationError> errorList;
+	private List<CrudApiResponseValidationError> errorList;
 
 	@JsonProperty("object")
 	private T object;
