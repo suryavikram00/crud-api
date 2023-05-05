@@ -6,6 +6,6 @@ import com.crud.api.entity.ZipcodeEntity;
 import com.crud.api.generic.service.GenericService;
 
 @Service
-public class ZipcodeServic extends GenericService<ZipcodeEntity> implements IZipcodeService {
+public class ZipcodeService extends GenericService<ZipcodeEntity> implements IZipcodeService {
     
 }
