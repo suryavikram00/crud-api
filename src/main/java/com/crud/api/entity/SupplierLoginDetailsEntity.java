@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Entity(name = "ncr_supplier_login_details")
 @Data
 @NoArgsConstructor
-public class SupplierLoginDetailsEntity extends BaseEntity implements Serializable {
+public class SupplierLoginDetailsEntity extends BaseEntity<Long> implements Serializable {
 
     public static final long serialVersionUID = 2L;
 
