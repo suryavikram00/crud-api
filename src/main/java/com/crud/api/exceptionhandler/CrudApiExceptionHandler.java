@@ -34,9 +34,9 @@ public class CrudApiExceptionHandler {
     public ResponseEntity<CrudApiResponse<String>> constraintViolationExceptionHandler(
             SQLIntegrityConstraintViolationException ex, WebRequest request) {
         String message = "Data Integrity Violation";
-        CrudApiResponse<String> magnumResponse = new CrudApiResponse<>(StatusEnum.FAILURE);
-        magnumResponse.setMessage("Data is not valid");
-        magnumResponse.setDebugMessage(ex.getLocalizedMessage());
+        CrudApiResponse<String> crudResponse = new CrudApiResponse<>(StatusEnum.FAILURE);
+        crudResponse.setMessage("Data is not valid");
+        crudResponse.setDebugMessage(ex.getLocalizedMessage());
 
         return buildResponseEntity(new CrudApiResponse<String>(StatusEnum.FAILURE)
                 .addMessage(ex.getMessage() != null ? ex.getMessage() : message).addDebugMessage(ex));

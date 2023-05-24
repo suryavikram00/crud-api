@@ -5,6 +5,7 @@
 package com.crud.api.generic.controller;
 
 import com.crud.api.generic.entity.BaseEntity;
+import com.crud.api.model.CrudApiResponse;
 import javax.websocket.server.PathParam;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -19,20 +20,20 @@ import org.springframework.web.bind.annotation.RestController;
  */
 public interface IGenericController<T extends BaseEntity> {
 
-    ResponseEntity<T> findAll();
+    ResponseEntity<CrudApiResponse<T>> findAll();
 
     /**
      *
      * @param id
      * @return
      */
-    ResponseEntity<T> findById(@PathVariable Long id);
+    ResponseEntity<CrudApiResponse<T>> findById(@PathVariable Long id);
 
-    ResponseEntity<T> findAllByPageable(
+    ResponseEntity<CrudApiResponse<T>> findAllByPageable(
             Boolean isPaged,
             @SortDefault(sort = "priRole")
             @PageableDefault(size = 20) final Pageable pageable);
     
-    ResponseEntity<T> findByFilter(T t);
+    ResponseEntity<CrudApiResponse<T>> findByFilter(T t);
 
 }

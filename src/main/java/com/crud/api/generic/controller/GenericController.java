@@ -4,8 +4,12 @@
  */
 package com.crud.api.generic.controller;
 
+import com.crud.api.constants.StatusEnum;
 import com.crud.api.generic.entity.BaseEntity;
+import com.crud.api.generic.entity.SimplePage;
 import com.crud.api.generic.service.IGenericService;
+import com.crud.api.model.CrudApiResponse;
+import java.util.List;
 import javax.websocket.server.PathParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,50 +41,61 @@ public class GenericController<T extends BaseEntity> implements IGenericControll
 
     @Override
     @GetMapping
-    public ResponseEntity<T> findAll() {
+    public ResponseEntity<CrudApiResponse<T>> findAll() {
         try {
-            return new ResponseEntity(genericService.findAll(), HttpStatus.OK);
+            List<T> list = genericService.findAll();
+            CrudApiResponse<T> crudApiResponse = new CrudApiResponse<>(StatusEnum.SUCCESS);
+            crudApiResponse.setObjectList(list);
+            return new ResponseEntity(crudApiResponse, HttpStatus.OK);
         } catch (Exception e) {
             log.error("Exception in findAll method :: ", e);
-            return new ResponseEntity("Erro ao buscar todos!", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(new CrudApiResponse<T>(StatusEnum.FAILURE), HttpStatus.OK);
         }
     }
 
     @Override
     @GetMapping("/paginate")
-    public ResponseEntity<T> findAllByPageable(
+    public ResponseEntity<CrudApiResponse<T>> findAllByPageable(
             Boolean isPaged,
             @SortDefault(sort = "id") @PageableDefault(size = 10) Pageable pageable) {
         try {
             if (isPaged == null || Boolean.FALSE.equals(isPaged)) {
                 pageable = Pageable.unpaged();
             }
-            return new ResponseEntity(genericService.findAll(pageable), HttpStatus.OK);
+            SimplePage<T> page = genericService.findAll(pageable);
+            CrudApiResponse<T> crudApiResponse = new CrudApiResponse<>(StatusEnum.SUCCESS);
+            crudApiResponse.setPageData(page);
+            return new ResponseEntity(crudApiResponse, HttpStatus.OK);
         } catch (Exception e) {
             log.error("Exception in findAll method :: ", e);
-            return new ResponseEntity("Erro ao buscar todos!", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(new CrudApiResponse<T>(StatusEnum.FAILURE), HttpStatus.OK);
         }
     }
 
     @Override
     @GetMapping(value = "/{id}")
-    public ResponseEntity<T> findById(@PathVariable Long id) {
+    public ResponseEntity<CrudApiResponse<T>> findById(@PathVariable Long id) {
         try {
-            return new ResponseEntity(genericService.findById(id), HttpStatus.OK);
+            CrudApiResponse<T> crudApiResponse = new CrudApiResponse<>(StatusEnum.SUCCESS);
+            crudApiResponse.setObject(genericService.findById(id));
+            return new ResponseEntity(crudApiResponse, HttpStatus.OK);
         } catch (Exception e) {
-            log.error("Exception in findAll method :: ", e);
-            return new ResponseEntity("Erro ao buscar todos!", HttpStatus.INTERNAL_SERVER_ERROR);
+            log.error("Exception in findById method :: ", e);
+            return new ResponseEntity(new CrudApiResponse<T>(StatusEnum.FAILURE), HttpStatus.OK);
         }
     }
 
     @Override
     @GetMapping(value = "/search")
-    public ResponseEntity<T> findByFilter( T t) {        
+    public ResponseEntity<CrudApiResponse<T>> findByFilter(T t) {
         try {
-            return new ResponseEntity(genericService.findByValue(t), HttpStatus.OK);
+            SimplePage<T> page = genericService.findByValue(t);
+            CrudApiResponse<T> crudApiResponse = new CrudApiResponse<>(StatusEnum.SUCCESS);
+            crudApiResponse.setPageData(page);
+            return new ResponseEntity(crudApiResponse, HttpStatus.OK);
         } catch (Exception e) {
-            log.error("Exception in findAll method :: ", e);
-            return new ResponseEntity("Erro ao buscar todos!", HttpStatus.INTERNAL_SERVER_ERROR);
+            log.error("Exception in findByFilter method :: ", e);
+            return new ResponseEntity(new CrudApiResponse<T>(StatusEnum.FAILURE), HttpStatus.OK);
         }
     }
 }
