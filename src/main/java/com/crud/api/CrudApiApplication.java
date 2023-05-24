@@ -6,10 +6,11 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+@SpringBootApplication(exclude = {
+//    DataSourceAutoConfiguration.class, 
+    SecurityAutoConfiguration.class})
 @EnableScheduling
-@ComponentScan("com.crud.api")
+@ComponentScan("com.crud.api.*")
 public class CrudApiApplication {
 
     public static void main(String[] args) {
