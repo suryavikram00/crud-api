@@ -14,22 +14,22 @@ import javax.persistence.MappedSuperclass;
  * @author NMSLAP570
  */
 @MappedSuperclass
-public class BaseEntity {
+public class BaseEntity<T> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private T id;
 	
 	
 
 	public BaseEntity() {
 	}
 
-	public Long getId() {
+	public T getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(T id) {
 		this.id = id;
 	}
 
