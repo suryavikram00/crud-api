@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.crud.api.annotation;
+package com.crud.api.aspect;
 
 import com.crud.api.generic.controller.GenericController;
 import com.crud.api.generic.controller.IGenericController;
@@ -18,13 +18,16 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class GenericControllerAspect {
+public class ExtendedControllerAspect {
 
-    @Pointcut("within(@com.crud.api.annotation.CommonController)")
+    @Pointcut("within(@com.crud.api.annotation.ExtendedController)")
     public void inheritGenericControllerClass() {
     }
 
     @DeclareParents(value = "inheritGenericControllerClass()", defaultImpl = GenericController.class)
-    private IGenericController<? extends BaseEntity> genericController;
+    private IGenericController<? extends BaseEntity> mixin;
+    
+//    @DeclareParents(value = "@annotation(com.crud.api.annotation.ExtendedController)", defaultImpl = BaseController.class)
+//    private BaseController<?> extendedController;
 
 }
