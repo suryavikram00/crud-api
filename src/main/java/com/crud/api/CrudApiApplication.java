@@ -12,9 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @ComponentScan("com.crud.api.*")
 public class CrudApiApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(CrudApiApplication.class, args);
     }
-
 }

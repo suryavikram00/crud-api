@@ -35,5 +35,7 @@ public interface IGenericController<T extends BaseEntity> {
             @PageableDefault(size = 20) final Pageable pageable);
     
     ResponseEntity<CrudApiResponse<T>> findByFilter(T t);
+    
+    ResponseEntity<CrudApiResponse<T>> updateEntity(T t);
 
 }

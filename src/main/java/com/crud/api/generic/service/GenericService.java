@@ -7,6 +7,7 @@ package com.crud.api.generic.service;
 import com.crud.api.generic.entity.BaseEntity;
 import com.crud.api.generic.entity.SimplePage;
 import com.crud.api.generic.repository.GenericRepository;
+import com.crud.api.model.CrudApiResponse;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,6 +21,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -44,8 +46,8 @@ public class GenericService<T extends BaseEntity> implements IGenericService<T> 
         }
     }
 
-    @Override    
-    public SimplePage<T>  findByValue(T t) {
+    @Override
+    public SimplePage<T> findByValue(T t) {
         log.info(" In Method :: {} {} ", t);
         List<T> ppoEntityList = new LinkedList<>();
         try {
@@ -73,6 +75,15 @@ public class GenericService<T extends BaseEntity> implements IGenericService<T> 
     public SimplePage<T> findAll(final Pageable pageable) {
         final Page<T> page = genericRepository.findAll(pageable);
         return new SimplePage<>(page.getContent(), page.getTotalElements(), pageable);
+    }
+
+    @Override
+    public T updateEntity(T t) {
+        try {
+            return genericRepository.save(t);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 }
