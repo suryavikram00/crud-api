@@ -47,18 +47,14 @@ public class GenericService<T extends BaseEntity> implements IGenericService<T> 
     }
 
     @Override
-    public SimplePage<T> findByValue(T t) {
+    public SimplePage<T> findByValue(T t, Pageable pageable) {
         log.info(" In Method :: {} {} ", t);
-        List<T> ppoEntityList = new LinkedList<>();
-        try {
-            ExampleMatcher matcher = null;
-            matcher = ExampleMatcher.matchingAny();
-            ppoEntityList = genericRepository.findAll(Example.of(t, matcher));
-            log.info(" Successfully fectched purchase order list of size :: {} ", ppoEntityList.size());
-        } catch (Exception e) {
-            log.info("Exception while fetching proposed po :: {} | {}" + t, e);
-        }
-        return new SimplePage<>(ppoEntityList, ppoEntityList.size(), Pageable.unpaged());
+        ExampleMatcher matcher = null;
+        matcher = ExampleMatcher.matchingAny();
+        final Page<T> page = genericRepository.findAll(Example.of(t, matcher), pageable);
+        log.info(" Successfully fectched purchase order list of size :: {} ", page.getNumberOfElements());
+        return new SimplePage<>(page.getContent(), page.getTotalElements(), pageable);
+
     }
 
     @Override

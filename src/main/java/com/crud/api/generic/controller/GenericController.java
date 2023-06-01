@@ -122,9 +122,14 @@ public class GenericController<T extends BaseEntity> implements IGenericControll
 
     @Override
     @GetMapping(value = "/search")
-    public ResponseEntity<CrudApiResponse<T>> findByFilter(T t) {
+    public ResponseEntity<CrudApiResponse<T>> findByFilter(T t,
+            Boolean isPaged,
+            @SortDefault(sort = "id") @PageableDefault(size = 10) Pageable pageable) {
         try {
-            SimplePage<T> page = genericService.findByValue(t);
+            if (isPaged == null || Boolean.FALSE.equals(isPaged)) {
+                pageable = Pageable.unpaged();
+            }
+            SimplePage<T> page = genericService.findByValue(t, pageable);
             CrudApiResponse<T> crudApiResponse = new CrudApiResponse<>(StatusEnum.SUCCESS);
             crudApiResponse.setPageData(page);
             return new ResponseEntity(crudApiResponse, HttpStatus.OK);

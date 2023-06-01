@@ -37,7 +37,9 @@ public interface IGenericController<T extends BaseEntity> {
             @SortDefault(sort = "priRole")
             @PageableDefault(size = 20) final Pageable pageable);
     
-    ResponseEntity<CrudApiResponse<T>> findByFilter(T t);
+    ResponseEntity<CrudApiResponse<T>> findByFilter(T t,
+            Boolean isPaged,
+            @SortDefault(sort = "id") @PageableDefault(size = 10) Pageable pageable);
     
     ResponseEntity<CrudApiResponse<T>> updateEntity(T t);
     

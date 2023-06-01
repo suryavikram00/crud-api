@@ -20,7 +20,7 @@ public interface IGenericService<T extends BaseEntity> {
 
     List<T> findAll() throws Exception;
 
-    public SimplePage<T>  findByValue(T t);
+    public SimplePage<T>  findByValue(T t, final Pageable pageable);
 
     public SimplePage<T> findAll(final Pageable pageable);
 
