@@ -15,6 +15,7 @@ public class Endpoints {
     public static final String ENDPOINT_PPO = ENDPOINT_V1_NMNCR_PREFIX + "/ppo";
     public static final String ENDPOINT_PO = ENDPOINT_V1_NMNCR_PREFIX + "/po";
     public static final String ENDPOINT_SUPPLIER_LOGIN_DETAIL = ENDPOINT_V1_NMNCR_PREFIX + "/supplier-login-detail";
+    public static final String ENDPOINT_SUPPLIER_MASTER = ENDPOINT_V1_NMNCR_PREFIX + "/supplier-master";
     public static final String ENDPOINT_ZIPCODE_DETAIL = ENDPOINT_V1_NMNCR_PREFIX + "/zipcode";
 
     public static final String GET_API_HEALTH_STATUS = "/status";

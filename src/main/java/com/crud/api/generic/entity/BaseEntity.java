@@ -18,9 +18,7 @@ public class BaseEntity<T> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private T id;
-	
-	
+	private T id;		
 
 	public BaseEntity() {
 	}

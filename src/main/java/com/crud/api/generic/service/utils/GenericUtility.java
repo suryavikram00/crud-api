@@ -35,7 +35,12 @@ public class GenericUtility {
             }
             field.setAccessible(true);
             Object value = field.get(object);
-            fieldValues.add(String.valueOf(value));
+            if (value != null) {
+                String fieldValue = String.valueOf(value).replace(",", "\\,"); // Escape pipe symbols
+                fieldValues.add('"' + fieldValue + '"');
+            } else {
+                fieldValues.add(""); // Add an empty string if the value is null
+            }
         }
         return String.join(",", fieldValues);
     }
