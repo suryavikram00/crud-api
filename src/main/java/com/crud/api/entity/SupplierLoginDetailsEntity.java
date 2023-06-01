@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -36,6 +37,7 @@ public class SupplierLoginDetailsEntity extends BaseEntity<Long> implements Seri
     private String supplierCode;
     
     @Column(name = "fc_code")
+    @NotEmpty
     private String fcCode;
     
     @Column(name = "user_id")
@@ -45,6 +47,7 @@ public class SupplierLoginDetailsEntity extends BaseEntity<Long> implements Seri
     private String password;
     
     @Column(name = "access_token")
+    @NotEmpty
     private String accessToken;
     
     @Column(name = "external_customer_code")

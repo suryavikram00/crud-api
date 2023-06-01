@@ -86,4 +86,13 @@ public class GenericService<T extends BaseEntity> implements IGenericService<T> 
         }
     }
 
+    @Override
+    public T createEntity(T t) {
+        try {
+            return genericRepository.save(t);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
 }

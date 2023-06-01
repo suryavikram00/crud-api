@@ -92,7 +92,7 @@ public class CrudApiExceptionHandler {
     }
 
     private ResponseEntity<CrudApiResponse<String>> buildResponseEntity(CrudApiResponse<String> magnumResponse) {
-        return new ResponseEntity<>(magnumResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(magnumResponse, HttpStatus.ACCEPTED);
     }
 
 }

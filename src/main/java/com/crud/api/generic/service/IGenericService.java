@@ -27,5 +27,7 @@ public interface IGenericService<T extends BaseEntity> {
     T findById(Long id) throws Exception;
     
     T updateEntity(T t);
+    
+    T createEntity(T t);
 
 }
