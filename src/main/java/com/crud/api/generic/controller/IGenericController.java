@@ -41,9 +41,9 @@ public interface IGenericController<T extends BaseEntity> {
             Boolean isPaged,
             @SortDefault(sort = "id") @PageableDefault(size = 10) Pageable pageable);
     
-    ResponseEntity<CrudApiResponse<T>> updateEntity(T t);
+    ResponseEntity<CrudApiResponse<T>> updateEntity(@RequestBody T t);
     
-    ResponseEntity<CrudApiResponse<T>> createEntity(@RequestBody T t);            
+    ResponseEntity<CrudApiResponse<T>> createEntity(@RequestBody T t);
 
    public void exportData(
             List<T> list,

@@ -19,13 +19,15 @@ import org.springframework.web.context.request.WebRequest;
 import com.crud.api.model.CrudApiResponseValidationError;
 import com.crud.api.model.CrudApiResponse;
 import com.crud.api.exception.CrudApiException;
+import lombok.extern.slf4j.Slf4j;
 
 @ControllerAdvice
+@Slf4j
 public class CrudApiExceptionHandler {
 
     @ExceptionHandler(value = CrudApiException.class)
     public ResponseEntity<CrudApiResponse<String>> magnumExceptionHandler(CrudApiException exception, WebRequest request) {
-        String message = "Magnum Runtime Exception";
+        String message = "Crud Runtime Exception :: " + exception.getLocalizedMessage();
         return buildResponseEntity(new CrudApiResponse<String>(StatusEnum.FAILURE).addMessage(message).addDebugMessage(exception));
     }
 
@@ -86,6 +88,7 @@ public class CrudApiExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<CrudApiResponse<String>> genericExceptionHandler(Exception exception, WebRequest request) {
+        log.info("Logging The exception {} ", exception);
         String message = "Something went wrong,Please contact magnum team";
         return buildResponseEntity(new CrudApiResponse<String>(StatusEnum.FAILURE).addMessage(message).addDebugMessage(exception));
     }

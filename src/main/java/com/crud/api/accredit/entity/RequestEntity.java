@@ -7,12 +7,9 @@ package com.crud.api.accredit.entity;
 import com.crud.api.accredit.accenum.RequestActionEnum;
 import com.crud.api.accredit.accenum.RequestStatusEnum;
 import com.crud.api.generic.entity.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vladmihalcea.hibernate.type.json.JsonType;
 
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -20,16 +17,17 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
-import org.hibernate.annotations.Where;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -42,8 +40,9 @@ import org.hibernate.annotations.Where;
 @TypeDefs({
     @TypeDef(name = "json", typeClass = JsonType.class) // Custom JsonUserType for mapping JSON to String column
 })
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class RequestEntity extends BaseEntity<Long> {
+@Slf4j
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class RequestEntity<T> extends BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,8 +78,62 @@ public class RequestEntity extends BaseEntity<Long> {
     @Temporal(TemporalType.TIMESTAMP)
     private Date submittedOn;
 
-    @OneToMany(mappedBy = "request")
-    @Where(clause = "status = 'PENDING'")
-    private List<RequestDetailEntity> requestDetailList;
+    public void setTag(String tag) {
+        this.tag = tag.toUpperCase();
+    }
+
+    public void setInitialValues() {
+        this.status = RequestStatusEnum.PENDING;
+        if (this.existingValue == null || this.existingValue.isEmpty()) {
+            this.setAction(RequestActionEnum.CREATE);
+        } else {
+            this.setAction(RequestActionEnum.UPDATE);
+        }
+        this.submittedOn = new Date();
+        this.submittedBy = "suryavikram@netmeds.com";
+    }
+//    // Getter and setter for newValue field
+//    public JSONObject getNewValue() {
+//        if (newValue == null) {
+//            return null;
+//        }
+//        try {
+//            return new JSONObject(newValue);
+//        } catch (JSONException e) {
+//            // Handle JSON parsing exception
+//            log.info("Error in parsing json :: getNewValue :: " + e);
+//            return null;
+//        }
+//    }
+//
+//    public void setNewValue(JSONObject newValue) {
+//        if (newValue == null) {
+//            this.newValue = null;
+//        } else {
+//            this.newValue = newValue.toString();
+//        }
+//    }
+//
+//// Getter and setter for existingValue field
+//    public JSONObject getExistingValue() {
+//        if (existingValue == null) {
+//            return null;
+//        }
+//        try {
+//            return new JSONObject(existingValue);
+//        } catch (JSONException e) {
+//            // Handle JSON parsing exception
+//            log.info("Error in parsing json :: getExistingValue :: " + e);
+//            return null;
+//        }
+//    }
+//
+//    public void setExistingValue(JSONObject existingValue) {
+//        if (existingValue == null) {
+//            this.existingValue = null;
+//        } else {
+//            this.existingValue = existingValue.toString();
+//        }
+//    }
 
 }

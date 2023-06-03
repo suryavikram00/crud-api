@@ -18,13 +18,13 @@ import org.springframework.stereotype.Service;
  */
 public interface IGenericService<T extends BaseEntity> {
 
-    List<T> findAll() throws Exception;
+    List<T> findAll();
 
-    public SimplePage<T>  findByValue(T t, final Pageable pageable);
+    public SimplePage<T>  findByValue(T t, final Pageable pageable, Boolean matchingAny);
 
     public SimplePage<T> findAll(final Pageable pageable);
 
-    T findById(Long id) throws Exception;
+    T findById(Long id);
     
     T updateEntity(T t);
     

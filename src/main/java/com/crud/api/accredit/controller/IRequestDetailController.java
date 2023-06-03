@@ -4,7 +4,7 @@
  */
 package com.crud.api.accredit.controller;
 
-import com.crud.api.accredit.entity.AccreditGroup;
+import com.crud.api.accredit.entity.AccreditGroupEntity;
 import com.crud.api.accredit.entity.RequestDetailEntity;
 import com.crud.api.accredit.entity.RequestEntity;
 import com.crud.api.nuttycrunch.entity.FcMasterEntity;

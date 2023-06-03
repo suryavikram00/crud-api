@@ -4,7 +4,7 @@
  */
 package com.crud.api.accredit.service;
 
-import com.crud.api.accredit.entity.AccreditGroup;
+import com.crud.api.accredit.entity.AccreditGroupEntity;
 import com.crud.api.accredit.entity.RequestEntity;
 import com.crud.api.nuttycrunch.service.*;
 import com.crud.api.nuttycrunch.entity.FcMasterEntity;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @author NMSLAP570
  */
 @Service
-public class AccreditGroupService extends GenericService<AccreditGroup>
+public class AccreditGroupService extends GenericService<AccreditGroupEntity>
         implements IAccreditGroupService {
 
 }

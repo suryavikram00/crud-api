@@ -4,6 +4,7 @@
  */
 package com.crud.api.generic.entity;
 
+import java.io.Serializable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,22 +15,15 @@ import javax.persistence.MappedSuperclass;
  * @author NMSLAP570
  */
 @MappedSuperclass
-public class BaseEntity<T> {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private T id;		
+public class BaseEntity<T> implements Serializable {
 
-	public BaseEntity() {
-	}
+    private static final long serialVersionUID = 2L;
 
-	public T getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private T id;
 
-	public void setId(T id) {
-		this.id = id;
-	}
-
+    public BaseEntity() {
+    }
 
 }

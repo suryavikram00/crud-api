@@ -4,7 +4,7 @@
  */
 package com.crud.api.accredit.controller;
 
-import com.crud.api.accredit.entity.AccreditGroup;
+import com.crud.api.accredit.entity.AccreditGroupEntity;
 import com.crud.api.accredit.entity.RequestEntity;
 import com.crud.api.nuttycrunch.entity.FcMasterEntity;
 import com.crud.api.generic.controller.IGenericController;
@@ -13,6 +13,6 @@ import com.crud.api.generic.controller.IGenericController;
  *
  * @author NMSLAP570
  */
-public interface IAccreditGroupController extends IGenericController<AccreditGroup> {
+public interface IAccreditGroupController extends IGenericController<AccreditGroupEntity> {
     
 }

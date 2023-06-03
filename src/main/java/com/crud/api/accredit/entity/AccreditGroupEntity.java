@@ -8,6 +8,7 @@ import com.crud.api.accredit.accenum.AccreditGroupLevelEnum;
 import com.crud.api.generic.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -28,28 +29,37 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "acc_accredit_group")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class AccreditGroup extends BaseEntity<Integer> {
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class AccreditGroupEntity extends BaseEntity<Long> {
+    
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
-    
+    private Long id;
+
     @Column(name = "tag", nullable = false)
     private String tag;
-    
+
     @Column(name = "level", nullable = false)
     @Enumerated(EnumType.STRING)
     private AccreditGroupLevelEnum level;
-    
+
     @Column(name = "approver_email", nullable = false)
     @NotNull
     private String approverEmail;
-    
+
     @Column(name = "next_level")
     @Enumerated(EnumType.STRING)
     private AccreditGroupLevelEnum nextLevel;
-    
-    
+
+    public static AccreditGroupEntity getInitialAccredition(List<AccreditGroupEntity> accreditGroupList) {
+        for (AccreditGroupEntity eachAccreditGroupEntity : accreditGroupList) {
+            if (AccreditGroupLevelEnum.L1.equals(eachAccreditGroupEntity.getLevel())) {
+                return eachAccreditGroupEntity;
+            }
+        }
+        return null;
+    }
+
 }
