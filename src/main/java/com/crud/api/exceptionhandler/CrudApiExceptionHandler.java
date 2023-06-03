@@ -18,7 +18,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.crud.api.model.CrudApiResponseValidationError;
 import com.crud.api.model.CrudApiResponse;
-import com.crud.api.model.exception.CrudApiException;
+import com.crud.api.exception.CrudApiException;
 
 
 @ControllerAdvice

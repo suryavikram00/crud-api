@@ -11,9 +11,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.crud.api.model.NcrUserModel;
-import com.crud.api.entity.NcrUserEntity;
-import com.crud.api.repository.NcrUserRepository;
+import com.crud.api.nuttycrunch.model.NcrUserModel;
+import com.crud.api.nuttycrunch.entity.NcrUserEntity;
+import com.crud.api.nuttycrunch.repository.NcrUserRepository;
 import com.crud.api.utility.JwtTokenUtils;
 import com.crud.api.utility.UserPermissionUtils;
 

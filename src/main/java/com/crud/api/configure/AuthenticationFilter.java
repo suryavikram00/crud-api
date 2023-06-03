@@ -19,8 +19,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.crud.api.utility.JwtTokenUtils;
-import com.crud.api.ncr.entities.NcrConfigEntity;
-import com.crud.api.service.NcrConfigService;
+import com.crud.api.nuttycrunch.entity.NcrConfigEntity;
+import com.crud.api.nuttycrunch.service.NcrConfigService;
 import com.crud.api.utility.CommonUtils;
 
 import lombok.extern.slf4j.Slf4j;

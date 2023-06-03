@@ -10,7 +10,7 @@ import com.crud.api.generic.entity.SimplePage;
 import com.crud.api.generic.service.IGenericService;
 import com.crud.api.generic.service.utils.GenericUtility;
 import com.crud.api.model.CrudApiResponse;
-import com.crud.api.model.NcrUserModel;
+import com.crud.api.nuttycrunch.model.NcrUserModel;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;

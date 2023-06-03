@@ -15,7 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.crud.api.model.NcrUserModel;
+import com.crud.api.nuttycrunch.model.NcrUserModel;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
