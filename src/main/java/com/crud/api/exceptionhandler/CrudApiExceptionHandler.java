@@ -20,7 +20,6 @@ import com.crud.api.model.CrudApiResponseValidationError;
 import com.crud.api.model.CrudApiResponse;
 import com.crud.api.exception.CrudApiException;
 
-
 @ControllerAdvice
 public class CrudApiExceptionHandler {
 

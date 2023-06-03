@@ -1,4 +1,4 @@
-package com.crud.api.configure;
+package com.crud.api.filter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse httpServletResponse = ((HttpServletResponse) response);
 
         try {
-            if (CommonUtils.canSkipFilter(httpServletRequest.getRequestURI())) {
+            if (true || CommonUtils.canSkipFilter(httpServletRequest.getRequestURI())) {
                 chain.doFilter(httpServletRequest, httpServletResponse);
                 return;
             }

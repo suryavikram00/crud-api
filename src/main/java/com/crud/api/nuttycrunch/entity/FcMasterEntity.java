@@ -33,8 +33,7 @@ public class FcMasterEntity extends BaseEntity<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @JsonIgnore
+    @Column(name = "id")    
     private Integer id;
 
     @Column(name = "code")

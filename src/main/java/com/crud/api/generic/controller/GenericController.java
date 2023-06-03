@@ -155,13 +155,13 @@ public class GenericController<T extends BaseEntity> implements IGenericControll
     @Override
     @PostMapping
     public ResponseEntity<CrudApiResponse<T>> createEntity(@Valid @RequestBody T t) {
-        try {
+//        try {
             CrudApiResponse<T> crudApiResponse = new CrudApiResponse<>(StatusEnum.SUCCESS);
             crudApiResponse.setObject(genericService.updateEntity(t));
             return new ResponseEntity(crudApiResponse, HttpStatus.OK);
-        } catch (Exception e) {
-            log.error("Exception in findByFilter method :: ", e);
-            return new ResponseEntity(new CrudApiResponse<T>(StatusEnum.FAILURE), HttpStatus.OK);
-        }
+//        } catch (Exception e) {
+//            log.error("Exception in findByFilter method :: ", e);
+//            return new ResponseEntity(new CrudApiResponse<T>(StatusEnum.FAILURE), HttpStatus.OK);
+//        }
     }
 }
