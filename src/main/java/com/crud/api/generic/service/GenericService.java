@@ -87,7 +87,10 @@ public class GenericService<T extends BaseEntity> implements IGenericService<T> 
     @Transactional
     public T createEntity(T t) {
         return genericRepository.save(t);
+    }
 
+    public void test() {
+        log.info("In generic service test method");
     }
 
 }

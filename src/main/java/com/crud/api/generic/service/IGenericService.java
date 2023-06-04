@@ -29,5 +29,6 @@ public interface IGenericService<T extends BaseEntity> {
     T updateEntity(T t);
     
     T createEntity(T t);
-
+    
+    void test();
 }

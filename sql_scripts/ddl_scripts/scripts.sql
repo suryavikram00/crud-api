@@ -40,15 +40,15 @@ CREATE TABLE `nuttycrunch`.`acc_accredit_group` (
 
 CREATE TABLE `nuttycrunch`.`acc_request_detail` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `request_id` BIGINT NOT NULL,
-  `accredit_group_id` INT NOT NULL,
+  `request_id` BIGINT NOT NULL,  
   `status` VARCHAR(45) NOT NULL,
   `approver_comment` VARCHAR(200) NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `REQ_APPROVAL_IDX` (`request_id` ASC, `accredit_group_id` ASC) VISIBLE);
+    `approver_email` VARCHAR(45) NOT NULL ,
+    `accredit_group_level` VARCHAR(45) NOT NULL ,
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `UNIQ_IDX` (`request_id` ASC, `accredit_group_level` ASC) INVISIBLE);
 
 ALTER TABLE acc_request_detail ADD CONSTRAINT FK_REQ_DET_REQ_ID 
     FOREIGN KEY (request_id) REFERENCES acc_request(id);
     
-ALTER TABLE acc_request_detail ADD CONSTRAINT FK_REQ_DET_APPR_GROUP_ID 
-    FOREIGN KEY (accredit_group_id) REFERENCES acc_accredit_group(id);
+

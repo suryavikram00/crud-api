@@ -18,14 +18,19 @@ import static com.crud.api.constants.Endpoints.ENDPOINT_ACC_REQUEST_DETAIL;
 import com.crud.api.constants.StatusEnum;
 import com.crud.api.exception.CrudApiException;
 import com.crud.api.model.CrudApiResponse;
+import com.crud.api.utility.JwtTokenUtils;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -46,45 +51,30 @@ public class RequestDetailController extends GenericController<RequestDetailEnti
     @Autowired
     private IRequestService requestService;
 
-    @Override
-    @PutMapping
-    public ResponseEntity<CrudApiResponse<RequestDetailEntity>> updateEntity(@RequestBody final RequestDetailEntity requestDetailEntity) {
-                                
-        // if the status is rejected or approved then update it in the db
-        requestDetailService.updateEntity(requestDetailEntity);
+//    @Override
+//    @GetMapping("/paginate")
+//    public ResponseEntity<CrudApiResponse<RequestDetailEntity>> findAllByPageable(
+//            Boolean isPaged,
+//            @SortDefault(sort = "id") @PageableDefault(size = 10) Pageable pageable) {
+//        if (isPaged == null || Boolean.FALSE.equals(isPaged)) {
+//            pageable = Pageable.unpaged();
+//        }
+//        RequestDetailEntity requestDetailEntity = new RequestDetailEntity();
+//        requestDetailEntity.setApproverEmail(JwtTokenUtils.getLoggedInUserEmail());
+//        RequestEntity requestEntity = new RequestEntity();
+//        requestEntity.setStatus(RequestStatusEnum.PENDING);
+//        requestDetailEntity.setRequest(requestEntity);
+//        return super.findByFilter(requestDetailEntity, isPaged, pageable, Boolean.FALSE);
+//    }
 
-        if (!RequestStatusEnum.PENDING.equals(requestDetailEntity.getRequest().getStatus())) {
-            throw new CrudApiException("Only pending state records can be updated | current status :: " + requestDetailEntity.getRequest().getStatus());
-        }
-
-        if (RequestStatusEnum.REJECTED.equals(requestDetailEntity.getStatus())
-                || RequestStatusEnum.APPROVED.equals(requestDetailEntity.getStatus())
-                && requestDetailEntity.getAccreditGroup().getNextLevel() == null) {
-            // if the status is approved, 
-            // if it didnot require a another round of approval then update the request status as success
-            RequestEntity requestEntity = requestDetailEntity.getRequest();
-            requestEntity.setStatus(requestDetailEntity.getStatus());
-            requestService.updateEntity(requestEntity);
-            
-            // we need to update the acutal entity using the existing and the new values
-            
-        } else if (RequestStatusEnum.APPROVED.equals(requestDetailEntity.getStatus())
-                && (requestDetailEntity.getAccreditGroup().getNextLevel() != null)) {
-            // if the status is approved and if required another round of approval        
-            // if yes then insert the request details into the table
-            AccreditGroupEntity accreditGroupEntity = new AccreditGroupEntity();
-            accreditGroupEntity.setTag(requestDetailEntity.getAccreditGroup().getTag());
-            accreditGroupEntity.setLevel(requestDetailEntity.getAccreditGroup().getNextLevel());
-            List<AccreditGroupEntity> accreditGroupEntityList = accreditGroupService
-                    .findByValue(accreditGroupEntity, Pageable.unpaged(), Boolean.FALSE).getContent();
-            requestDetailService.updateEntity(new RequestDetailEntity(requestDetailEntity.getRequest(),
-                    accreditGroupEntityList.get(0)));
-        }
-
-        CrudApiResponse<RequestDetailEntity> crudApiResponse = new CrudApiResponse<RequestDetailEntity>(StatusEnum.SUCCESS)
-                .addMessage("Successfully updated the status of the request!");
-        crudApiResponse.setObject(requestDetailEntity);
-        return new ResponseEntity(crudApiResponse, HttpStatus.OK);
-    }
+//    @Override
+//    @GetMapping(value = "/search")
+//    public ResponseEntity<CrudApiResponse<RequestDetailEntity>> findByFilter(RequestDetailEntity requestDetailEntity,
+//            Boolean isPaged,
+//            @SortDefault(sort = "id") @PageableDefault(size = 10) Pageable pageable,
+//            @RequestParam(required=true,defaultValue="false") Boolean matchingAny) {
+//        requestDetailEntity.setApproverEmail(JwtTokenUtils.getLoggedInUserEmail());
+//        return super.findByFilter(requestDetailEntity, isPaged, pageable, matchingAny);
+//    }
 
 }

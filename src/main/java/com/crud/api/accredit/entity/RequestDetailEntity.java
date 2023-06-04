@@ -50,16 +50,20 @@ public class RequestDetailEntity extends BaseEntity<Long> {
     @Column(name = "request_id", nullable = false)
     private Long requestId;
 
-    @ManyToOne
-    @JoinColumn(name = "accredit_group_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @JsonIgnore
-    private AccreditGroupEntity accreditGroup;
+//    @ManyToOne
+//    @JoinColumn(name = "accredit_group_id", referencedColumnName = "id", insertable = false, updatable = false)
+//    @JsonIgnore
+//    private AccreditGroupEntity accreditGroup;
+    @Column(name = "approver_email", nullable = false)
+    private String approverEmail;
 
-    @Column(name = "accredit_group_id", nullable = false)
-    @JsonIgnore
-    private Long accreditGroupId;
-    
+    @Column(name = "accredit_group_level", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private AccreditGroupLevelEnum accreditGroupLevel;
 
+//    @Column(name = "accredit_group_id", nullable = false)
+//    @JsonIgnore
+//    private Long accreditGroupId;
     @Column(name = "approver_comment", nullable = false)
     private String approverComment;
 
@@ -74,72 +78,68 @@ public class RequestDetailEntity extends BaseEntity<Long> {
 
     @Transient
     private String existingValue;
-    
+
     @Transient
+    @Enumerated(EnumType.STRING)
     private RequestActionEnum action;
 
     @Transient
-    private AccreditGroupLevelEnum level;
+    @Enumerated(EnumType.STRING)
+    private RequestStatusEnum requestStatus;
 
-    @Transient
-    private String approverEmail;
-    
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private RequestStatusEnum status;
 
     public String getTag() {
-        return this.request.getTag();
+        return this.request != null ? this.request.getTag() : this.tag;
     }
 
     public String getUniqueIdentifier() {
-        return this.request.getUniqueIdentifier();
+        return this.request != null ? this.request.getUniqueIdentifier() : this.uniqueIdentifier;
+    }
+
+    public RequestStatusEnum getRequestStatus() {
+        return this.request != null ? this.request.getStatus() : this.requestStatus;
     }
 
     public String getNewValue() {
-        return this.request.getNewValue();
+        return this.request != null ? this.request.getNewValue() : this.newValue;
     }
 
     public String getExistingValue() {
-        return this.request.getExistingValue();
+        return this.request != null ? this.request.getExistingValue() : this.existingValue;
     }
 
     public RequestActionEnum getAction() {
-        return this.request.getAction();
+        return this.request != null ? this.request.getAction() : null;
     }
 
-    public AccreditGroupLevelEnum getLevel() {
-        return this.accreditGroup.getLevel();
-    }
-
-    public String getApproverEmail() {
-        return this.accreditGroup.getApproverEmail();
-    }
-
-    public RequestDetailEntity(RequestEntity requestEntity, AccreditGroupEntity accreditGroup) {
+//    public AccreditGroupLevelEnum getLevel() {
+//        return this.accreditGroup.getLevel();
+//    }
+//
+//    public String getApproverEmail() {
+//        return this.accreditGroup.getApproverEmail();
+//    }
+    public RequestDetailEntity(RequestEntity requestEntity, AccreditGroupEntity accreditGroupEntity) {
         this.request = requestEntity;
         this.requestId = requestEntity.getId();
-        this.accreditGroup = accreditGroup;
-        this.accreditGroupId = accreditGroup.getId();
         this.status = RequestStatusEnum.PENDING;
         this.tag = requestEntity.getTag();
         this.uniqueIdentifier = requestEntity.getUniqueIdentifier();
         this.newValue = requestEntity.getNewValue();
         this.existingValue = requestEntity.getExistingValue();
-        this.level = accreditGroup.getLevel();
-        this.approverEmail = accreditGroup.getApproverEmail();
+        this.accreditGroupLevel = accreditGroupEntity.getLevel();
+        this.approverEmail = accreditGroupEntity.getApproverEmail();
     }
 
     public void setRequest(RequestEntity requestEntity) {
+        this.request = requestEntity;
         this.tag = requestEntity.getTag();
         this.uniqueIdentifier = requestEntity.getUniqueIdentifier();
         this.newValue = requestEntity.getNewValue();
         this.existingValue = requestEntity.getExistingValue();
-    }
-
-    public void setAccreditGroup(AccreditGroupEntity accreditGroup) {
-        this.level = accreditGroup.getLevel();
-        this.approverEmail = accreditGroup.getApproverEmail();
     }
 
 }

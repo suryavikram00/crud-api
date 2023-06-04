@@ -7,12 +7,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication(exclude = {
-//    DataSourceAutoConfiguration.class, 
+    //    DataSourceAutoConfiguration.class, 
     SecurityAutoConfiguration.class})
 @EnableScheduling
 @ComponentScan("com.crud.api.*")
 public class CrudApiApplication {
+
     public static void main(String[] args) {
-        SpringApplication.run(CrudApiApplication.class, args);
-    }
+        SpringApplication.run(CrudApiApplication.class, args);        
+    }   
 }

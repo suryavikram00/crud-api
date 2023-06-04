@@ -39,6 +39,8 @@ public class JwtTokenUtils {
 
     static String permissionDetails = null;
 
+    static String userEmailId = null;
+
     public String createJWT(NcrUserModel ncrUserModel) {
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
@@ -50,7 +52,7 @@ public class JwtTokenUtils {
 
         JwtBuilder builder = null;
         builder = Jwts.builder().setId(ncrUserModel.getId().toString()).setIssuedAt(now)
-                .setSubject(ncrUserModel.getUserName()).setIssuer(ISSUER)
+                .setSubject(ncrUserModel.getEmailId()).setIssuer(ISSUER)
                 .claim("userPermission", ncrUserModel.getPermissionDetails()).signWith(signatureAlgorithm, signingKey);
 
         if (EXPIRATION_MILLI_SECOND >= 0) {
@@ -75,6 +77,10 @@ public class JwtTokenUtils {
     public static Integer getLoggedInUserId() {
         return userId;
     }
+    
+    public static String getLoggedInUserEmail() {
+        return userEmailId;
+    }
 
     public boolean parseJWT(String jwt) {
         try {
@@ -86,6 +92,7 @@ public class JwtTokenUtils {
             }
             userId = Integer.parseInt(claims.getId());
             permissionDetails = claims.get("userPermission").toString();
+            userEmailId = claims.getSubject().toString();
         } catch (Exception e) {
             return false;
         }

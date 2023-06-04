@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,19 +59,14 @@ public class GenericController<T extends BaseEntity> implements IGenericControll
     @GetMapping("/paginate")
     public ResponseEntity<CrudApiResponse<T>> findAllByPageable(
             Boolean isPaged,
-            @SortDefault(sort = "id") @PageableDefault(size = 10) Pageable pageable) {
-        try {
-            if (isPaged == null || Boolean.FALSE.equals(isPaged)) {
-                pageable = Pageable.unpaged();
-            }
-            SimplePage<T> page = genericService.findAll(pageable);
-            CrudApiResponse<T> crudApiResponse = new CrudApiResponse<>(StatusEnum.SUCCESS);
-            crudApiResponse.setPageData(page);
-            return new ResponseEntity(crudApiResponse, HttpStatus.OK);
-        } catch (Exception e) {
-            log.error("Exception in findAll method :: ", e);
-            return new ResponseEntity(new CrudApiResponse<T>(StatusEnum.FAILURE), HttpStatus.OK);
+            @SortDefault(sort = "id") @PageableDefault(size = 10) Pageable pageable            ) {
+        if (isPaged == null || Boolean.FALSE.equals(isPaged)) {
+            pageable = Pageable.unpaged();
         }
+        SimplePage<T> page = genericService.findAll(pageable);
+        CrudApiResponse<T> crudApiResponse = new CrudApiResponse<>(StatusEnum.SUCCESS);
+        crudApiResponse.setPageData(page);
+        return new ResponseEntity(crudApiResponse, HttpStatus.OK);
     }
 
     @Override
@@ -110,12 +106,13 @@ public class GenericController<T extends BaseEntity> implements IGenericControll
     @GetMapping(value = "/search")
     public ResponseEntity<CrudApiResponse<T>> findByFilter(T t,
             Boolean isPaged,
-            @SortDefault(sort = "id") @PageableDefault(size = 10) Pageable pageable) {
+            @SortDefault(sort = "id") @PageableDefault(size = 10) Pageable pageable,
+            @RequestParam(required=true,defaultValue="true") Boolean matchingAny) {
         try {
             if (isPaged == null || Boolean.FALSE.equals(isPaged)) {
                 pageable = Pageable.unpaged();
             }
-            SimplePage<T> page = genericService.findByValue(t, pageable, Boolean.TRUE);
+            SimplePage<T> page = genericService.findByValue(t, pageable, matchingAny);
             CrudApiResponse<T> crudApiResponse = new CrudApiResponse<>(StatusEnum.SUCCESS);
             crudApiResponse.setPageData(page);
             return new ResponseEntity(crudApiResponse, HttpStatus.OK);
@@ -137,7 +134,7 @@ public class GenericController<T extends BaseEntity> implements IGenericControll
     @PostMapping
     public ResponseEntity<CrudApiResponse<T>> createEntity(@Valid @RequestBody T t) {
         CrudApiResponse<T> crudApiResponse = new CrudApiResponse<T>(StatusEnum.SUCCESS).addMessage("Data created successfully");
-        crudApiResponse.setObject(genericService.updateEntity(t));
+        crudApiResponse.setObject(genericService.createEntity(t));
         return new ResponseEntity(crudApiResponse, HttpStatus.OK);
     }
 }

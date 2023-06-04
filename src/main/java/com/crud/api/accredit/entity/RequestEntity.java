@@ -7,6 +7,7 @@ package com.crud.api.accredit.entity;
 import com.crud.api.accredit.accenum.RequestActionEnum;
 import com.crud.api.accredit.accenum.RequestStatusEnum;
 import com.crud.api.generic.entity.BaseEntity;
+import com.crud.api.utility.JwtTokenUtils;
 import com.vladmihalcea.hibernate.type.json.JsonType;
 
 import java.util.Date;
@@ -90,7 +91,7 @@ public class RequestEntity<T> extends BaseEntity<Long> {
             this.setAction(RequestActionEnum.UPDATE);
         }
         this.submittedOn = new Date();
-        this.submittedBy = "suryavikram@netmeds.com";
+        this.submittedBy = JwtTokenUtils.getLoggedInUserEmail();
     }
 //    // Getter and setter for newValue field
 //    public JSONObject getNewValue() {

@@ -51,7 +51,7 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse httpServletResponse = ((HttpServletResponse) response);
 
         try {
-            if (true || CommonUtils.canSkipFilter(httpServletRequest.getRequestURI())) {
+            if (CommonUtils.canSkipFilter(httpServletRequest.getRequestURI())) {
                 chain.doFilter(httpServletRequest, httpServletResponse);
                 return;
             }
