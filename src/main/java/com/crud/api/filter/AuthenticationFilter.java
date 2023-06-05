@@ -1,4 +1,4 @@
-package com.crud.api.configure;
+package com.crud.api.filter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-@Order(1)
+@Order(2)
 public class AuthenticationFilter implements Filter {
 
     @Autowired

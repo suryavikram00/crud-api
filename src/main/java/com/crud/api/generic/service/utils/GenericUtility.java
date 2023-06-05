@@ -4,14 +4,20 @@
  */
 package com.crud.api.generic.service.utils;
 
+import com.crud.api.generic.exception.CrudApiException;
+import com.crud.api.generic.enums.TableNameEnum;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  *
  * @author NMSLAP570
  */
+@Slf4j
 public class GenericUtility {
 
     public static <T> String getFieldNames(Class<T> clazz) {
@@ -43,6 +49,26 @@ public class GenericUtility {
             }
         }
         return String.join(",", fieldValues);
+    }
+
+    public static Class<?> getClassName(TableNameEnum tableNameEnum) {
+        String className = tableNameEnum.getQualifiedClassName();
+        Class<?> clazz = null;
+        try {
+            clazz = Class.forName(className);
+            // Now you can use the 'clazz' object to access the class type
+            log.info("Class type: " + clazz.getName());
+        } catch (ClassNotFoundException e) {
+            // Handle the exception if the class is not found
+            throw new CrudApiException("Exception when trying to create class :: " + className);
+        }
+        return clazz;
+    }
+    
+    public static ObjectMapper getObjectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return mapper;
     }
 
 }

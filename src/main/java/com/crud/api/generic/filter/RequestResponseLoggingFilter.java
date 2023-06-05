@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.crud.api.filter;
+package com.crud.api.generic.filter;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

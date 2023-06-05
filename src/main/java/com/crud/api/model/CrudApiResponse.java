@@ -1,6 +1,6 @@
 package com.crud.api.model;
 
-import com.crud.api.constants.StatusEnum;
+import com.crud.api.generic.enums.StatusEnum;
 import java.time.LocalDateTime;
 import java.util.List;
 

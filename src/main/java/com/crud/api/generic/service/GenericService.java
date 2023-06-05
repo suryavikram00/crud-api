@@ -23,6 +23,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -37,20 +38,20 @@ public class GenericService<T extends BaseEntity> implements IGenericService<T> 
     protected GenericRepository<T> genericRepository;
 
     @Override
-    public List<T> findAll() throws Exception {
-        try {
-            return genericRepository.findAll();
-        } catch (Exception e) {
-            log.info("Exception in findAll method :: ", e);
-            throw e;
-        }
+    public List<T> findAll() {
+        return genericRepository.findAll();
     }
 
     @Override
-    public SimplePage<T> findByValue(T t, Pageable pageable) {
+    public SimplePage<T> findByValue(T t, Pageable pageable, Boolean matchingAny) {
         log.info(" In Method :: {} {} ", t);
         ExampleMatcher matcher = null;
-        matcher = ExampleMatcher.matchingAny();
+        if (matchingAny) {
+            matcher = ExampleMatcher.matchingAny();
+        } else {
+            matcher = ExampleMatcher.matchingAll();
+        }
+
         final Page<T> page = genericRepository.findAll(Example.of(t, matcher), pageable);
         log.info(" Successfully fectched purchase order list of size :: {} ", page.getNumberOfElements());
         return new SimplePage<>(page.getContent(), page.getTotalElements(), pageable);
@@ -58,7 +59,7 @@ public class GenericService<T extends BaseEntity> implements IGenericService<T> 
     }
 
     @Override
-    public T findById(Long id) throws Exception {
+    public T findById(Long id) {
         try {
             Optional<T> optional = genericRepository.findById(id);
             return optional.isPresent() ? optional.get() : null;
@@ -74,21 +75,22 @@ public class GenericService<T extends BaseEntity> implements IGenericService<T> 
     }
 
     @Override
+    @Transactional
     public T updateEntity(T t) {
-        try {
-            return genericRepository.save(t);
-        } catch (Exception e) {
-            throw e;
-        }
+        // if accredition is not enabled then, save
+
+        // if enabled create a request
+        return genericRepository.save(t);
     }
 
     @Override
+    @Transactional
     public T createEntity(T t) {
-        try {
-            return genericRepository.save(t);
-        } catch (Exception e) {
-            throw e;
-        }
+        return genericRepository.save(t);
+    }
+
+    public void test() {
+        log.info("In generic service test method");
     }
 
 }
