@@ -19,7 +19,7 @@ import org.hibernate.annotations.Where;
 
 import com.crud.api.nuttycrunch.model.NcrConfigModel;
 import com.crud.api.utility.JwtTokenUtils;
-import com.ncr.config.enums.DataType;
+import com.crud.api.nuttycrunch.enums.DataType;
 import java.util.Objects;
 
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
-package com.crud.api.exceptionhandler;
+package com.crud.api.generic.exceptionhandler;
 
-import com.crud.api.constants.StatusEnum;
+import com.crud.api.generic.enums.StatusEnum;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +18,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.crud.api.model.CrudApiResponseValidationError;
 import com.crud.api.model.CrudApiResponse;
-import com.crud.api.exception.CrudApiException;
+import com.crud.api.generic.exception.CrudApiException;
 import lombok.extern.slf4j.Slf4j;
 
 @ControllerAdvice

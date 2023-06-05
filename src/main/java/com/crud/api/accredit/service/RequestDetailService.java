@@ -11,7 +11,7 @@ import com.crud.api.accredit.entity.RequestEntity;
 import com.crud.api.accredit.repository.IAccreditGroupRepository;
 import com.crud.api.accredit.repository.IRequestDetailRepository;
 import com.crud.api.accredit.repository.IRequestRepository;
-import com.crud.api.exception.CrudApiException;
+import com.crud.api.generic.exception.CrudApiException;
 import com.crud.api.generic.entity.BaseEntity;
 import com.crud.api.generic.enums.TableNameEnum;
 import com.crud.api.nuttycrunch.service.*;

@@ -3,7 +3,7 @@ package com.crud.api.nuttycrunch.model;
 
 import com.crud.api.nuttycrunch.entity.NcrConfigEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ncr.config.enums.DataType;
+import com.crud.api.nuttycrunch.enums.DataType;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;

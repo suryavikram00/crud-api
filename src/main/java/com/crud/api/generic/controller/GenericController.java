@@ -4,7 +4,7 @@
  */
 package com.crud.api.generic.controller;
 
-import com.crud.api.constants.StatusEnum;
+import com.crud.api.generic.enums.StatusEnum;
 import com.crud.api.generic.entity.BaseEntity;
 import com.crud.api.generic.entity.SimplePage;
 import com.crud.api.generic.service.IGenericService;

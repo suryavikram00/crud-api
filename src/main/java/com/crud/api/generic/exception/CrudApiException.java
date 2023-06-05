@@ -1,4 +1,4 @@
-package com.crud.api.exception;
+package com.crud.api.generic.exception;
 
 import lombok.NoArgsConstructor;
 

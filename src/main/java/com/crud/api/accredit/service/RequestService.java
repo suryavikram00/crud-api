@@ -11,7 +11,7 @@ import com.crud.api.accredit.entity.RequestEntity;
 import com.crud.api.accredit.repository.IAccreditGroupRepository;
 import com.crud.api.accredit.repository.IRequestDetailRepository;
 import com.crud.api.accredit.repository.IRequestRepository;
-import com.crud.api.exception.CrudApiException;
+import com.crud.api.generic.exception.CrudApiException;
 import com.crud.api.generic.service.GenericService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

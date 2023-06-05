@@ -4,7 +4,7 @@
  */
 package com.crud.api.generic.service.utils;
 
-import com.crud.api.exception.CrudApiException;
+import com.crud.api.generic.exception.CrudApiException;
 import com.crud.api.generic.enums.TableNameEnum;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
