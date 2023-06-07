@@ -86,12 +86,12 @@ public class CrudApiExceptionHandler {
         return buildResponseEntity(magnumResponse);
     }
 
-    @ExceptionHandler(value = Exception.class)
-    public ResponseEntity<CrudApiResponse<String>> genericExceptionHandler(Exception exception, WebRequest request) {
-        log.info("Logging The exception {} ", exception);
-        String message = "Something went wrong,Please contact magnum team";
-        return buildResponseEntity(new CrudApiResponse<String>(StatusEnum.FAILURE).addMessage(message).addDebugMessage(exception));
-    }
+//    @ExceptionHandler(value = Exception.class)
+//    public ResponseEntity<CrudApiResponse<String>> genericExceptionHandler(Exception exception, WebRequest request) {
+//        log.info("Logging The exception {} ", exception);
+//        String message = "Something went wrong,Please contact magnum team";
+//        return buildResponseEntity(new CrudApiResponse<String>(StatusEnum.FAILURE).addMessage(message).addDebugMessage(exception));
+//    }
 
     private ResponseEntity<CrudApiResponse<String>> buildResponseEntity(CrudApiResponse<String> magnumResponse) {
         return new ResponseEntity<>(magnumResponse, HttpStatus.ACCEPTED);

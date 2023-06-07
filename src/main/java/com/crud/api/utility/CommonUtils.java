@@ -36,7 +36,11 @@ public class CommonUtils {
     }
 
     public static boolean canSkipFilter(String url) {
-        if (url.equals("/" + ENDPOINT_V1_VERSION + "/login") || url.contains("status") || url.contains("swagger") || url.contains("api-docs")) {
+        if (url.equals("/" + ENDPOINT_V1_VERSION + "/login") 
+                || url.contains("status") 
+                || url.contains("swagger") 
+                || url.contains("api-docs")
+                || url.contains("crud-panel")) {
             return true;
         }
         return false;
